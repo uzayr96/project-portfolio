@@ -7,3 +7,4 @@ seaborn
 yfinance
 scikit-learn
 jupyter
+jupyter-cache
