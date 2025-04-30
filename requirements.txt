@@ -1,11 +1,11 @@
-plotly
 pandas
 numpy
-yahooquery
-matplotlib
-seaborn
 yfinance
-scikit-learn
 jupyter
 jupyter-cache
 itables
+yahooquery
+matplotlib
+plotly
+seaborn
+
