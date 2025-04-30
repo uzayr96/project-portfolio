@@ -1,0 +1,125 @@
+---
+title: Résumé & Credentials
+width: 1500
+---
+
+[View My CV](cv.pdf){target="_blank"}
+
+# ACADEMIC PROFILE
+
+
+
+## Master of Science
+::: {.columns}
+
+::: {.column}
+
+### Business Analysis & Consulting
+Institute: **University of Strathclyde** \
+Location: Glasgow, United Kingdom \
+[View My Degree](Master_Degree.pdf){target="_blank"}\
+[Visit Official Website](https://www.strath.ac.uk)
+:::
+
+
+::: {.column}
+<object data="Master_Degree.pdf" type="application/pdf" id="pdf-embed">
+    <embed src="Master_Degree.pdf" id="pdf-embed-inner">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="Master_Degree.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
+:::
+:::
+
+## Bachelor of Business Administration
+
+::: {.columns}
+
+::: {.column}
+
+### Accounting & Finance
+Institute: **SZABIST** \
+Location: Dubai, United Arab Emirates \
+[View My Degree](Diploma%20Bachelor.pdf){target="_blank"}\
+[Visit Official Website](https://szabist.edu.pk/programs/)
+:::
+
+
+::: {.column}
+<object data="Diploma Bachelor.pdf" type="application/pdf" id="pdf-embed">
+    <embed src="Diploma Bachelor.pdf" id="pdf-embed-inner">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="Diploma Bachelor.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
+:::
+:::
+
+# CERTIFICATIONS
+
+::: {.columns}
+
+::: {.column}
+
+### Data Science (Python and SQL)
+Platform: **365DataScience** \
+[View My Certificate](DataScientist.pdf){target="_blank"}\
+[Visit Official Website](https://365datascience.com)
+:::
+
+
+::: {.column}
+<object data="DataScience365.pdf" type="application/pdf" id="pdf-embed">
+    <embed src="DataScience365.pdf" id="pdf-embed-inner">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="DataScience365.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
+:::
+:::
+
+### Data Science with R
+
+::: {.columns}
+
+::: {.column}
+
+Platform: **DataCamp** \
+[View My Certificate](DataScience365.pdf){target="_blank"}\
+[Visit Official Website](https://www.datacamp.com)
+:::
+
+
+::: {.column}
+<object data="DataScientist.pdf" type="application/pdf" id="pdf-embed">
+    <embed src="DataScientist.pdf" id="pdf-embed-inner">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="DataScientist.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
+:::
+:::
+
+### Advanced Tableau
+
+::: {.columns}
+
+::: {.column}
+
+Platform: **Udemy** \
+[View My Certificate](AdvanceTableau.pdf){target="_blank"}\
+[Visit Official Website](https://www.udemy.com/course/tableau10-advanced/?couponCode=ST7MT290425G2)
+:::
+
+
+::: {.column}
+<object data="AdvanceTableau.pdf" type="application/pdf" id="pdf-embed">
+    <embed src="AdvanceTableau.pdf" id="pdf-embed-inner">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="AdvanceTableau.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
+:::
+:::
+

@@ -1,0 +1,32 @@
+{
+  "index.qmd": {
+    "index.html": "6aee367d"
+  },
+  "about.qmd": {
+    "about.html": "747b8a8d"
+  },
+  "project.qmd": {
+    "project.html": "56edec91"
+  },
+  "Data Cleaning/slideshow.qmd": {
+    "slideshow.html": "62dfaf81"
+  },
+  "financial_analysis/financialreport.qmd": {
+    "financialreport.html": "83d2019c"
+  },
+  "Mask Detection.ipynb": {
+    "Mask Detection.html": "a932cead"
+  },
+  "Credit Default Risk.ipynb": {
+    "Credit Default Risk.html": "eface5a5"
+  },
+  "LoanPredAnalytics.ipynb": {
+    "LoanPredAnalytics.html": "27106be8"
+  },
+  "Restaurant Revenue Prediction.ipynb": {
+    "Restaurant Revenue Prediction.html": "2ce76692"
+  },
+  "Credit Risk Modelling.ipynb": {
+    "Credit Risk Modelling.html": "85e27b11"
+  }
+}

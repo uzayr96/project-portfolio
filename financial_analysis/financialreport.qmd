@@ -1,0 +1,532 @@
+---
+title: "Financial Analysis"
+date: "2025-04-19"
+orientation: rows
+format: 
+    dashboard:
+        scrolling: true 
+        theme: [custom.scss]
+            
+---
+
+# Overview
+
+## Stock Overview
+
+```{python}
+import pandas as pd
+import requests as re
+import yfinance as yf
+import plotly.express as px
+import plotly.graph_objects as go
+from data import *
+from itables import show
+ticker = 'GOOG'
+
+def format_trillions(x):
+    if x >= 1e12:
+        return f'{round(x / 1e12, 2)}T'  # Rounds to 1 decimal place
+    else:
+        return x
+
+```
+
+```{python}
+#| content: valuebox
+#| title: Company
+#| freeze: true
+#| fill: true
+#| cache: true
+company_name = get_name(ticker=ticker)
+dict(
+    icon = "google",
+    color = "#00927B",
+    value = company_name
+)
+```
+
+```{python}
+#| content: valuebox
+#| title: Stock
+#| freeze: true
+#| fill: true
+#| cache: true
+stock_price = get_price(ticker=ticker)
+
+dict(
+    icon = "currency-dollar",
+    color = "#00927B",
+    value = stock_price
+    
+    )
+```
+
+```{python}
+#| content: valuebox
+#| title: Change
+#| fill: true
+#| freeze: true
+#| cache: true
+change_pr = get_change(ticker=ticker)
+icon_1 = "chevron-up" if change_pr > 0 else "chevron-down"
+dict(
+    icon = icon_1,
+    color = "#00927B",
+    value = f"{change_pr} %"
+)
+```
+
+```{python}
+#| content: valuebox
+#| title: Market Cap
+#| fill: true
+#| freeze: true
+#| cache: true
+market_cap = get_market_cap(ticker=ticker)
+market_cap = format_trillions(market_cap)
+dict(
+    icon = "bank",
+    color = "#00927B",
+    value = market_cap
+)
+```
+
+## Plot
+
+```{python}
+#| jupyter_compat: true
+#| echo: false
+#| title: Revenue
+#| fill: true
+#| freeze: true
+#| cache: true
+income_statement = get_income_statement(ticker)
+
+
+fig_1 = px.bar(data_frame = income_statement,x= income_statement['asOfDate'].dt.year, y=['TotalRevenue'], color_discrete_map={
+        'TotalRevenue': '#00927B'
+    })
+
+fig_1 = fig_1.update_layout(xaxis_title=None,yaxis_title=None, plot_bgcolor='rgba(0,0,0,0)',
+    paper_bgcolor='rgba(0,0,0,0)',bargap=0.4,showlegend=False,
+    xaxis=dict(
+        showgrid=False,
+        zeroline=False
+    ),
+    yaxis=dict(
+        showgrid=False,
+        zeroline=False
+    ),
+    margin=dict(l=20, r=20, b=20, t=20)
+)
+fig_1 = fig_1.update_xaxes(type='category')
+fig_1 = fig_1.update_yaxes(ticklabelposition="inside top", title=None)
+fig_1.show()
+
+
+```
+
+```{python}
+#| jupyter_compat: true
+#| echo: false
+#| title: Net Income
+#| fill: true
+#| freeze: true
+#| cache: true
+fig_2 = go.Figure(go.Bar(
+            x=income_statement["asOfDate"].dt.year,
+            y=income_statement["NetIncome"],
+            marker=dict(
+        color='#00927B'
+    )
+        ))
+
+fig_2 = fig_2.update_layout(
+    xaxis_title=None,
+    yaxis_title=None,
+    plot_bgcolor='rgba(0,0,0,0)',
+    paper_bgcolor='rgba(0,0,0,0)',
+    bargap=0.4,
+    showlegend=False,
+    yaxis=dict(
+        showgrid=False,
+        zeroline=False
+    ),
+    xaxis=dict(
+        showgrid=False,
+        zeroline=False
+    ),
+    margin=dict(l=20, r=20, b=20, t=20)
+)
+
+
+fig_2 = fig_2.update_xaxes(type='category')
+fig_2.show()
+
+```
+
+```{python}
+#| jupyter_compat: true
+#| echo: false
+#| title: "EPS"
+#| fill: true
+#| freeze: true
+#| cache: true
+fig_3 = go.Figure(go.Bar(
+            x=income_statement["asOfDate"].dt.year,
+            y=income_statement["BasicEPS"],
+            marker=dict(
+        color='#00927B'
+    )
+        ))
+
+
+
+fig_3 = fig_3.update_layout(
+    xaxis_title=None,
+    yaxis_title=None,
+    plot_bgcolor='rgba(0,0,0,0)',
+    paper_bgcolor='rgba(0,0,0,0)',
+    bargap=0.4,
+    showlegend=False,
+    yaxis=dict(
+        showgrid=False,
+        zeroline=False
+    ),
+    xaxis=dict(
+        showgrid=False,
+        zeroline=False
+    ),
+    margin=dict(l=20, r=20, b=20, t=20)
+)
+
+fig_3 = fig_3.update_xaxes(type='category')
+
+fig_3.show()
+
+```
+
+## CashAssets 
+
+```{python}
+#| jupyter_compat: true
+#| echo: false
+#| title: "Assets"
+#| fill: true
+#| freeze: true
+#| cache: true
+balance_sheet = get_balance_sheet(ticker=ticker)
+
+fig_4 = px.bar(data_frame = balance_sheet,x=balance_sheet['asOfDate'].dt.year, y=['TotalAssets'], color_discrete_map={
+        'TotalAssets': '#00927B'
+    })
+
+fig_4 = fig_4.update_layout(xaxis_title=None,yaxis_title=None, plot_bgcolor='rgba(0,0,0,0)',
+    paper_bgcolor='rgba(0,0,0,0)', showlegend=False, bargap=0.4,
+    xaxis=dict(
+        showgrid=False,
+        zeroline=False
+    ),
+    yaxis=dict(
+        showgrid=False,
+        zeroline=False
+    ),
+    margin=dict(l=20, r=20, b=20, t=20)
+)
+
+fig_4 = fig_4.update_xaxes(type='category')
+
+fig_4.show()
+
+```
+
+
+
+```{python}
+#| jupyter_compat: true
+#| echo: false
+#| title: Liabilities
+#| fill: true
+#| freeze: true
+#| cache: true
+fig_5 = px.bar(x=balance_sheet['asOfDate'].dt.year, y=balance_sheet['TotalDebt'])
+
+
+fig_5 = fig_5.update_traces(marker_color='#00927B')
+
+fig_5 = fig_5.update_layout(xaxis_title=None,yaxis_title=None, plot_bgcolor='rgba(0,0,0,0)',
+    paper_bgcolor='rgba(0,0,0,0)',showlegend=False, bargap=0.4,
+    xaxis=dict(
+        showgrid=False,
+        zeroline=False
+    ),
+    yaxis=dict(
+        showgrid=False,
+        zeroline=False
+    ),
+    margin=dict(l=20, r=20, b=20, t=20)
+    )
+
+fig_5 = fig_5.update_xaxes(type='category')
+
+fig_5.show()
+
+```
+
+
+```{python}
+#| jupyter_compat: true
+#| echo: false
+#| title: "Free Cash Flow"
+#| fill: true
+#| freeze: true
+#| cache: true
+cash_flow = get_cash_flow_statement(ticker=ticker)
+
+fig_6 = px.bar(x=cash_flow['asOfDate'].dt.year, y=cash_flow['FreeCashFlow'])
+
+
+fig_6 = fig_6.update_traces(marker_color='#00927B')
+
+fig_6 = fig_6.update_layout(xaxis_title=None,yaxis_title=None, plot_bgcolor='rgba(0,0,0,0)',
+    paper_bgcolor='rgba(0,0,0,0)', showlegend=False, bargap=0.4,
+    xaxis=dict(
+        showgrid=False,
+        zeroline=False
+    ),
+    yaxis=dict(
+        showgrid=False,
+        zeroline=False
+    ),
+    margin=dict(l=20, r=20, b=20, t=20)
+    )
+
+fig_6 = fig_6.update_xaxes(type='category')
+fig_6.show()
+
+```
+
+
+
+
+
+# Valuation
+
+## Stats
+
+```{python}
+#| content: valuebox
+#| title: P/E Ratio
+#| fill: true
+#| freeze: true
+#| cache: true
+pe_ratio = round(get_pe_ratio(ticker=ticker),2)
+
+dict(
+    icon = "ratio",
+    color = "#00927B",
+    value = pe_ratio
+    
+    )
+```
+
+
+
+```{python}
+#| content: valuebox
+#| title: Current Price
+#| fill: true
+#| freeze: true
+#| cache: true
+dict(
+    icon = "currency-dollar",
+    color = "#00927B",
+    value = stock_price
+    
+    )
+```
+
+
+```{python}
+#| content: valuebox
+#| title: Beta
+#| fill: true
+#| freeze: true
+beta = get_beta(ticker=ticker)
+dict(
+    icon="",
+    color = "#00927B",
+    value = beta
+    
+    )
+```
+
+
+
+```{python}
+#| content: valuebox
+#| title: WACC
+#| fill: true
+#| freeze: true
+#| cache: true
+wacc = get_wacc(ticker=ticker,risk_free_rate=0.045, 
+market_return=0.10)
+
+dict(
+    icon = "percent",
+    color = "#00927B",
+    value = f"{round(wacc, 3) * 100}"
+    )
+
+```
+
+
+
+## Stock 
+
+### {width="75%"}
+```{python}
+#| title: Stock
+#| fill: true
+#| freeze: true
+#| cache: true
+stock = get_data(ticker)
+stock = stock.reset_index()
+
+
+fig_7 = px.line(x=stock['date'],y=stock['adjclose'])
+
+fig_7= fig_7.update_traces(line_color='#00927B')
+
+
+fig_7 = fig_7.update_layout(xaxis_title=None,yaxis_title=None, plot_bgcolor='rgba(0,0,0,0)',
+    paper_bgcolor='rgba(0,0,0,0)',
+    yaxis=dict(
+        showgrid=False,
+        zeroline=False
+    ),
+    xaxis=dict(
+        showgrid=False,
+        zeroline=False
+    ),
+    margin=dict(l=20, r=20, b=20, t=20)
+    )
+
+fig_7.show()
+```
+
+
+### {width="25%"}
+
+```{python}
+#| title: Forward PE
+#| content: valuebox
+#| fill: true
+#| freeze: true
+#| cache: true
+valuation = get_valuation_metrics(ticker=ticker)
+forward_pe = valuation['ForwardPeRatio'].iloc[-1]
+
+dict(
+    icon = "arrow-right",
+    color = "#00927B",
+    value = forward_pe
+    )
+```
+
+
+```{python}
+#| title: Valuation
+#| content: valuebox
+#| fill: true
+#| freeze: true
+#| cache: true
+enterprise_value = valuation['EnterpriseValue'].iloc[-1]
+
+dict(
+    icon = 'cash',
+    color = "#00927B",
+    value = format_trillions(enterprise_value)
+    )
+```
+
+## Calculations 
+
+```{python}
+#| title: Intrinsic Value
+#| fill: true
+#| freeze: true
+#| cache: true
+show(get_intrinsic_value(ticker, 0.05,0.10,0.15, wacc), responsive=False, sorting=False, info=False, searching=False)
+```
+
+
+
+
+# Analyst Recommendations
+
+##
+
+```{python}
+#| title: Recommendations by Analysts
+#| fill: true
+#| freeze: true
+#| cache: true
+df = get_recommendations(ticker = ticker)
+fig_8 = go.Figure(data=[go.Scatter(
+    x=df['period'],
+    y=df['strongBuy'],
+    mode='lines+markers',
+    name='Strong Buy',
+    line=dict(color='green')
+), go.Scatter(
+    x=df['period'],
+    y=df['buy'],
+    mode='lines+markers',
+    name='Buy',
+    line=dict(color='lightgreen')
+), go.Scatter(
+    x=df['period'],
+    y=df['hold'],
+    mode='lines+markers',
+    name='Hold',
+    line=dict(color='orange')
+), go.Scatter(
+    x=df['period'],
+    y=df['sell'],
+    mode='lines+markers',
+    name='Sell',
+    line=dict(color='red')
+), go.Scatter(
+    x=df['period'],
+    y=df['strongSell'],
+    mode='lines+markers',
+    name='Strong Sell',
+    line=dict(color='darkred')
+)])
+
+fig_8 = fig_8.update_layout(
+    title=f'Analyst Recommendation Trend for {ticker} (Last 3 months)',
+    xaxis_title='Period',
+    yaxis_title='Number of Recommendations',
+    legend_title='Recommendation',
+    hovermode='x unified',
+    xaxis=dict(
+        showgrid=False,
+        zeroline=False
+    ),
+    yaxis=dict(
+        showgrid=False,
+        zeroline=False
+    ), 
+    plot_bgcolor='rgba(0,0,0,0)',
+    paper_bgcolor='rgba(0,0,0,0)',
+    margin=dict(l=20, r=20, b=20, t=20),
+    hoverlabel=dict(bgcolor='rgba(0,0,0,0)'),
+    hoverdistance=10,  # Adjust this value as needed
+)
+fig_8.show()
+```
+
+
+

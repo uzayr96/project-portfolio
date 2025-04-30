@@ -1,0 +1,12 @@
+{
+  "hash": "e985522b1837e4387402f08a56cc4a4b",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Bringing boring data to life\"\nauthor: \"Uzair Ahmed\"\nformat: \n  revealjs:\n    theme: default\n    slide-number: true\n---\n\n\n## Slide 1\n\n\n::: {.column}\n\n::: {#0482ae78 .cell execution_count=2}\n``` {.python .cell-code}\nprint(f\"Number of Rows: {df.shape[0]}\")\nprint(f\"Number of Columns: {df.shape[1]}\")\n```\n:::\n\n\n:::\n\n\n::: {.column}\n\n::: {#6b1ee9e2 .cell execution_count=3}\n\n::: {.cell-output .cell-output-stdout}\n```\nNumber of Rows: 1460\nNumber of Columns: 81\n```\n:::\n:::\n\n\n:::\n\n\n\n\n## Slide 2\n\n\n\n\n## Slide 3\n\n",
+    "supporting": [
+      "test_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

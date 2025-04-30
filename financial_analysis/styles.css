@@ -1,0 +1,24 @@
+
+  .quarto-dashboard .bslib-value-box .value-box-value {
+    font-size: clamp(.3em, 10cqw, 10em) !important;
+}
+  
+
+
+.quarto-dashboard .value-box {
+  font-size: 0.4rem !important;
+  padding: 0.4rem !important;
+  min-height: 1rem !important;
+}
+
+.quarto-dashboard .value-box .bi {
+  font-size: 0.5rem !important;
+}
+
+.quarto-dashboard .value-box .value-box-title {
+  font-size: 0.4rem !important;
+}
+
+.column {
+  margin-bottom: 0.5rem;
+}

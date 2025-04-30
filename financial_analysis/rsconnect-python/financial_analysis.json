@@ -1,0 +1,12 @@
+{
+    "https://api.shinyapps.io": {
+        "server_url": "https://api.shinyapps.io",
+        "filename": "/Users/uzairahmed/Documents/Final_Portfolio/Portfolio_folder/Portfolio folder/pythonProject/pythonProject/pythonProject/financial_analysis",
+        "app_url": "https://turningboringdatatolife.shinyapps.io/value/",
+        "app_id": 14564603,
+        "app_guid": null,
+        "title": "value",
+        "app_mode": "python-shiny",
+        "app_store_version": 1
+    }
+}

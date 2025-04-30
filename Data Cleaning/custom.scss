@@ -1,0 +1,19 @@
+/*-- scss:defaults --*/
+
+$gradient-start-color: #f0f0f0; /* Light gray starting color */
+$gradient-end-color: #b3b3b3;   /* Slightly darker gray ending color */
+$gradient-direction: to right; 
+$slide-border-left-color: #007bff; /* Blue color for the left border */
+$slide-border-left-width: 30px;
+$slide-box-shadow: 5px 5px 15px rgba(0, 102, 255, 0.432);
+
+.reveal {
+  background: linear-gradient($gradient-direction, $gradient-start-color, $gradient-end-color);
+}
+
+.reveal .slides > section {
+  border-left: $slide-border-left-width solid $slide-border-left-color;
+  padding-left: 1em; /* Add some padding to the right of the border */
+}
+
+/* You can add other custom styles here as well */

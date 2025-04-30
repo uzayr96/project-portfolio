@@ -1,0 +1,507 @@
+---
+title: "Bringing boring data to life"
+author: "Uzair Ahmed"
+date: '2024-05-01'
+format: 
+  revealjs:
+    theme: custom.scss
+    slide-number: true
+    auto-animate: true
+    logo: 'images/logo.jpg'
+    transition: fade
+    incremental: true
+    width: 1600
+    height: 800
+    show-slide-number: all
+    footer: '[quarto.org](https://{{< meta prerelease-subdomain >}}quarto.org)'
+    preview-links: auto
+    controls: true
+    code-overflow: wrap
+    chalkboard: true
+    css: custom.css
+execute:
+  cache: true
+---
+
+```{python}
+#| include: false
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from itables import show
+pd.set_option('display.max_columns', 500)
+df = pd.read_csv("Data/train.csv")
+
+button_css = """
+.dataTables_wrapper .dataTables_paginate .paginate_button,
+.dataTables_wrapper .dataTables_length select {
+    padding: 0.2em 0.5em; /* Adjust vertical and horizontal padding */
+    font-size: 0.6em; /* Reduce font size */
+    margin: 0 0.1em; /* Adjust spacing */
+}
+.dataTables_wrapper .dataTables_length label,
+.dataTables_wrapper .dataTables_filter label {
+    font-size: 0.9em; /* Adjust label font size if needed */
+}
+"""
+
+```
+
+## 
+
+::: {.callout title="Data Cleaning" .fade-in-then-out}
+
+**Data cleaning** is a crucial process that involves identifying and correcting errors, inconsistencies, and inaccuracies in datasets. Its importance stems from the significant impact it has on the reliability and effectiveness of data-driven decision-making
+
+:::
+
+![&nbsp;](images/data.jpeg){.fragment height="500"}
+
+
+## {transition="concave" transition-speed="slow"}
+
+::: {.callout-important title="Pros of clean data"}
+
+- Improves Accuracy and Reliability of Analysis
+- Decisions based on clean, high-quality data are more likely to be effective and aligned with business goals
+- Accurate data allows for a clearer understanding of trends, customer behavior, and market dynamics, enabling organizations to identify opportunities and mitigate risks effectively
+- Clean data ensures that reports and analyses are trustworthy, leading to greater confidence among stakeholders
+- Clean data facilitates smoother data integration and processing across different systems and applications
+- Poor data quality can lead to mistakes like overstocking inventory, misinterpreting customer behavior, and inefficient marketing campaigns, all of which can result in significant financial losses
+
+:::
+
+
+## {transition="concave" transition-speed="slow"}
+
+::: {.callout-warning title="What to watch out for"}
+
+- Garbage in, garbage out
+- Avoids costly errors
+- Storage costs
+- Regulatory requirements
+- Security risks
+:::
+
+![&nbsp;](images/messy.jpeg){fig-align="center" width="75%"}
+
+
+# Data Process {transition="zoom" transition-speed="slow"}
+
+
+## Data Process {transition="concave" transition-speed="slow"}
+
+![&nbsp;](images/process.png){fig-align="center" width="100%"}
+
+## Data Investigation {transition="concave" transition-speed="slow"}
+
+
+:::: {.columns}
+
+::: {.column width="100%"}
+
+```{python}
+#| echo: true
+#| output-location: column
+#| code-line-numbers: "1|2"
+print(f"Rows: {df.shape[0]}")
+print(f"Columns: {df.shape[1]}")
+```
+:::
+
+::::
+
+
+## Data Investigation {transition="concave" transition-speed="slow"}
+
+```{python}
+#| echo: false
+df.head(5)
+```
+
+
+## Missing Values..... {transition="concave" transition-speed="slow"}
+
+```{python}
+#| echo: true
+#| output: true
+#| code-overflow: wrap
+#| output-location: column-fragment
+missing=(df.isnull().sum() / len(df)) * 100
+
+## Missing percentage > 0
+missing=missing[missing > 0] 
+
+## Convert to dataframe and sort values
+missing_df=pd.DataFrame({'Missing Values' : missing})
+missing_df=missing_df['Missing Values'].sort_values(ascending = False)
+
+f, ax = plt.subplots(figsize=(6,6))
+sns.barplot(x=missing_df.index, y=missing_df.values, ax=ax)
+plt.title('Columns with missing Values', fontsize = 14)
+plt.xlabel('', fontsize = 10)
+plt.ylabel('%', fontsize = 10)
+plt.xticks(rotation = 'vertical')
+plt.show()
+
+```
+
+## Remove Columns {transition="concave" transition-speed="slow"}
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: column
+
+cols_to_drop = missing[missing > 60].index
+df_cleaned = df.drop(columns=cols_to_drop)
+
+# Compare the number of columns
+compare_data={
+'Data': ['Raw', 'Cleaned Data'],
+'Columns': [df.shape[1], df_cleaned.shape[1]]
+}
+
+print(pd.DataFrame(compare_data))
+
+```
+
+## Missing value imputation {transition="concave" transition-speed="slow"}
+
+### Filling with None
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: column-fragment
+#| code-overflow: wrap
+cols=['FireplaceQu',
+'GarageType', 
+'GarageFinish',
+'GarageQual', 
+'GarageCond', 
+'BsmtQual', 
+'BsmtCond',
+'BsmtExposure',
+'BsmtFinType1', 
+'BsmtFinType2',
+'MasVnrType', 
+'MSSubClass']
+for col in cols:
+    df_cleaned[col] = df_cleaned[col].fillna('None')
+
+df_cleaned['FireplaceQu'].value_counts()
+
+```
+
+## Missing value imputation {transition="concave" transition-speed="slow"}
+
+### Filling with 0
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: column-fragment
+#| code-overflow: wrap
+columns = ['BsmtFinSF1', 
+'BsmtFinSF2', 
+'BsmtUnfSF',
+'TotalBsmtSF',
+'BsmtFullBath', 
+'BsmtHalfBath',
+'MasVnrArea', 
+'GarageYrBlt', 
+'GarageArea', 
+'GarageCars']
+for col in columns:
+    df_cleaned[col] = df_cleaned[col].fillna(0)
+
+print(df_cleaned[cols].isnull().sum())
+
+
+```
+
+## Missing value imputation {transition="concave" transition-speed="slow"}
+
+### Filling with Median
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: fragment
+df_cleaned["LotFrontage"] = df_cleaned.groupby("Neighborhood")["LotFrontage"].transform(
+    lambda x: x.fillna(x.median()))
+lot_front = df_cleaned["LotFrontage"].isnull().sum()
+print(f"Neighborhoods with remaining missing LotFrontage: {lot_front}")
+
+```
+
+## Remove columns with near zero variance {transition="concave" transition-speed="slow"}
+
+### Identify Near Zero variance
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: fragment
+near_zero_variance_cols = []
+for col in df_cleaned.select_dtypes(include='object').columns:
+    value_counts = df[col].value_counts(normalize=True)
+    if len(value_counts) > 0 and value_counts.iloc[0] >= 0.8:
+        near_zero_variance_cols.append(col)
+print(near_zero_variance_cols)
+```
+
+## Remove columns with near zero variance {transition="concave" transition-speed="slow"}
+
+### Drop the near zero variance
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: fragment
+df_cleaned = df_cleaned.drop(columns=near_zero_variance_cols)
+compare_data = {
+    'Dataset': ['Raw Data', 'Cleaned Data'],
+    'Number of Columns': [df.shape[1], df_cleaned.shape[1]]
+}
+print(pd.DataFrame(compare_data).to_string(index=False))
+```
+
+## So, How does the cleaned data look like? {transition="concave" transition-speed="slow"}
+
+### Take a Peak
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: fragment
+print(df_cleaned.isnull().sum())
+```
+
+## And what about the column types? {transition="concave" transition-speed="slow"}
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: fragment
+print(df_cleaned.dtypes)
+```
+
+## {transition="concave" transition-speed="slow"}
+
+### Numeric to Categorical
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: column-fragment
+cols = ["MSSubClass", 
+"OverallCond", 
+"YrSold", 
+"MoSold"]
+for col in cols:
+    df_cleaned[col]=df_cleaned[col].astype(str)
+
+print(df_cleaned[cols].dtypes)
+```
+
+# Feature Engineering {transition="zoom" transition-speed="slow"}
+
+## Total Area {transition="concave" transition-speed="slow"}
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: fragment
+df_cleaned['TotalArea'] = df_cleaned['TotalBsmtSF'] + df_cleaned['1stFlrSF'] + df_cleaned['2ndFlrSF']
+df_cleaned[['TotalBsmtSF', '1stFlrSF', '2ndFlrSF', 'TotalArea']].head()
+```
+
+## Label Encoding {transition="concave" transition-speed="slow"}
+
+```{python}
+#| echo: true
+clean_variables = {"LotShape": {"IR3": 0, "IR2": 1, "IR1": 2, "Reg": 3},
+                   "ExterQual": {"Po": 1, "Fa": 2, "TA": 3, "Gd": 4, "Ex": 5},
+                   "ExterCond": {"Po": 1, "Fa": 2, "TA": 3, "Gd": 4, "Ex": 5},
+                   "BsmtQual": {"None": 0,"Po": 1, "Fa": 2, "TA": 3, "Gd": 4, "Ex": 5},
+                  "BsmtCond": {"None": 0,"Po": 1, "Fa": 2, "TA": 3, "Gd": 4, "Ex": 5},
+                  "BsmtExposure": {"None": 0, "No": 1, "Mn": 2, "Av": 3, "Gd": 4},
+                  "BsmtFinType1": {"None": 0, "Unf": 1, "LwQ": 2, "Rec": 3, "BLQ": 4, "ALQ": 5, "GLQ": 6},
+                  "BsmtFinType2": {"None": 0, "Unf": 1, "LwQ": 2, "Rec": 3, "BLQ": 4, "ALQ": 5, "GLQ": 6},
+                  "HeatingQC": {"Po": 1, "Fa": 2, "TA": 3, "Gd": 4, "Ex": 5},
+                  "KitchenQual": {"Po": 1, "Fa": 2, "TA": 3, "Gd": 4, "Ex": 5},
+                   "FireplaceQu": {"None": 0,"Po": 1, "Fa": 2, "TA": 3, "Gd": 4, "Ex": 5},
+                  "GarageFinish": {"None": 0, "Unf": 1, "RFn": 2, "Fin": 3},
+                  "GarageQual": {"None": 0,"Po": 1, "Fa": 2, "TA": 3, "Gd": 4, "Ex": 5},
+                  "GarageCond": {"None": 0,"Po": 1, "Fa": 2, "TA": 3, "Gd": 4, "Ex": 5},
+                  "Fence": {"None": 0, "MnWw": 1, "GdWw": 2, "MnPrv": 3, "GdPrv": 4}}
+
+df_cleaned.replace(clean_variables, inplace=True)
+```
+
+# Data Analysis {transition="zoom" transition-speed="slow"}
+
+## Price vs Living Area {transition="concave" transition-speed="slow"}
+
+### With Outlier
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: fragment
+plt.scatter(df_cleaned['GrLivArea'], df_cleaned['SalePrice'])
+plt.xlabel('Living Area')
+plt.ylabel('Sale Price')
+plt.show()
+```
+
+## Price vs Total Area {transition="concave" transition-speed="slow"}
+
+### Without Outlier
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: fragment
+df_cleaned = df_cleaned.drop(df_cleaned[(df_cleaned['GrLivArea'] > 4000) & (df_cleaned['SalePrice'] < 300000)].index)
+plt.scatter(df_cleaned['TotalArea'], df_cleaned['SalePrice'])
+plt.title('')
+plt.xlabel('Total Area')
+plt.ylabel('Sale Price')
+plt.show()
+
+```
+
+## Price vs Overall Quality {transition="concave" transition-speed="slow"}
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: fragment
+sns.boxplot(x = df_cleaned['OverallQual'],
+            y = df_cleaned['SalePrice'])
+plt.show()
+```
+
+## Price vs Overall Quality {transition="concave" transition-speed="slow"}
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: fragment
+plt.figure(figsize=(12, 5))
+sns.boxplot(x = df_cleaned['Neighborhood'],
+            y = df_cleaned['SalePrice'])
+plt.title('Sales Price And Neighbourhood')
+plt.xticks(rotation = 90)
+plt.show()
+```
+
+## Price vs House Style {transition="concave" transition-speed="slow"}
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: fragment
+plt.figure(figsize=(12, 5))
+sns.boxplot(x = df_cleaned['HouseStyle'],
+            y = df_cleaned['SalePrice'])
+plt.xticks(rotation = 90)
+plt.show()
+
+```
+
+## Statistics {transition="concave" transition-speed="slow"}
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: slide
+houses_sold_per_neighborhood = df_cleaned.groupby('Neighborhood').size().reset_index(name='Number of Houses Sold')
+
+average_price_per_neighborhood = df_cleaned.groupby('Neighborhood')['SalePrice'].mean().reset_index(name='Average Sale Price')
+
+neighborhood_sales_summary = pd.merge(houses_sold_per_neighborhood, average_price_per_neighborhood, on='Neighborhood')
+
+show(neighborhood_sales_summary, scrollY="300px", scrollCollapse=True, paging=False, buttons=["copyHtml5", "csvHtml5", "excelHtml5"], classes="display nowrap table_with_monospace_font", searching=False)
+```
+
+## Most Expensive {transition="concave" transition-speed="slow"}
+
+```{python}
+#| echo: true
+#| output: true
+#| output-location: slide
+df_exp = df_cleaned.sort_values(by='SalePrice', ascending=False)
+
+top_10_exp = df_exp.head(10)
+top_10_exp = top_10_exp.reset_index(drop=True)
+# Display the top 10 most expensive houses using itables
+show(top_10_exp,
+     scrollY="300px",
+     scrollCollapse=True,
+     paging=False,
+     classes="display compact cell-border",
+     caption="Top 10 Most Expensive Houses",
+     index=False,
+     buttons=["copyHtml5", "csvHtml5", "excelHtml5"])
+
+```
+
+# Conclusion {transition="concave" transition-speed="slow"}
+
+## Conclusion {auto-animate-easing="ease-in-out"}
+
+- Data cleaning and processing are not merely preliminary tasks; they are integral to unlocking the true potential of data
+- Investing time and resources in these stages yields significant returns in the form of enhanced accuracy, improved efficiency, reduced costs, and more confident, data-driven strategies
+
+::: {.r-stack}
+![&nbsp;](images/messy_lego.jpeg){.fragment height="300"}
+
+![&nbsp;](images/clean.jpeg){.fragment height="300"}
+
+:::
+
+## Conclusion {transition="concave" transition-speed="slow"}
+
+::: {.panel-tabset}
+
+### Raw
+
+```{python}
+show(df,
+     scrollY="200px",
+     scrollCollapse=True,
+     paging=False,
+     classes="display compact cell-border",
+     index=False,
+     buttons=["copyHtml5", "csvHtml5", "excelHtml5"],
+    style=button_css)
+```
+
+### Cleaned
+
+```{python}
+show(df_cleaned.reset_index(drop=True),
+     scrollY="200px",
+     scrollCollapse=True,
+     paging=False,
+     classes="display compact cell-border",
+     caption="View of cleaned data",
+     index=False,
+     buttons=["copyHtml5", "csvHtml5", "excelHtml5"],
+     style=button_css)
+```
+
+:::
+
+
+
+
+
+
+
+
+

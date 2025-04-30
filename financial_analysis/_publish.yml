@@ -1,0 +1,4 @@
+- source: financialreport.qmd
+  quarto-pub:
+    - id: 2a6fc05c-bf84-4f19-b233-0ee086a332b0
+      url: https://uzairahmed96.quarto.pub/financial-analysis

@@ -1,0 +1,125 @@
+---
+title: Personal Projects
+width: 1500
+
+---
+
+
+
+
+
+
+## 1. Data Cleaning and Transformation Guide
+
+
+::: {.columns}
+
+::: {.column width=30%}
+![](dataanalytics.png){id="cover"}
+:::
+
+::: {.column width=70%}
+This initiative involved the creation of an in-depth presentation on data cleaning and transformation methodologies, built using the Quarto publishing system. The guide emphasizes practical application using the Pandas library for data manipulation and Plotly for generating insightful and interactive visualizations. The primary goal was to produce a clear and concise resource for individuals looking to effectively clean, transform, and present data.
+
+[View project](Data%20Cleaning/slideshow.qmd)
+:::
+
+:::
+
+
+
+
+
+
+
+## 2. Financial Analysis
+
+
+::: {.columns}
+
+
+::: {.column width=70%}
+
+This project involved developing a visual dashboard to facilitate the analysis of company financial performance and the determination of stock intrinsic value. The dashboard aims to provide actionable insights for investment decisions by presenting key financial ratios and valuation outputs in a clear and interactive format. This approach mirrors the structure used for analyzing a range of companies and their respective stocks. 
+
+::: {.callout-note}
+Please note that this is a sample dashboard to showcase the automation of the analysis I do for stocks
+:::
+[View Dashboard](financial_analysis/financialreport.qmd)
+
+:::
+
+::: {.column width=30%}
+
+![](visual.png){id="cover"}
+
+:::
+
+:::
+
+
+
+
+
+## 3. Face Mask Detection
+
+
+::: {.columns}
+::: {.column width=30%}
+
+![](deep.webp){id="cover"}
+
+:::
+
+::: {.column width=70%}
+
+This project addressed the critical need for face mask detection during the COVID-19 pandemic by developing a robust CNN model. This technology has potential applications in various settings to automatically monitor mask usage and promote safer environments.
+
+[View Project](Mask%20Detection.ipynb)
+:::
+
+:::
+
+
+
+## 4. Restaurant Revenue Prediction
+
+
+::: {.columns}
+
+::: {.column width=70%}
+
+This project focused on building a robust revenue prediction model for restaurant branches using the XGBoost algorithm. By analyzing historical sales data and potentially other relevant factors (e.g., location, seasonality, promotions), the model aims to provide accurate forecasts to support inventory management, staffing decisions, and overall business strategy for the restaurant chain.
+
+[View Project](Restaurant%20Revenue%20Prediction.ipynb)
+:::
+
+::: {.column width=30%}
+![](revenue.jpg){id="cover"}
+:::
+
+::: 
+
+
+
+
+
+## 5. Credit Risk Modelling
+
+
+::: {.columns}
+::: {.column width=30%}
+![](credit.jpg){id="cover"}
+:::
+::: {.column width=70%}
+
+The project contains a "Brief Exploratory Data Analysis" section. This suggests that initial investigations were performed to understand the data's characteristics, distributions of variables, and potential relationships. Weight of Evidence (WOE) and Information Value (IV) are calculated for the binned variables. WOE helps to transform categorical variables for logistic regression, and IV measures the predictive power of each variable. The performance of the logistic regression model is evaluated using the Area Under the Curve (AUC) on the test data. AUC measures the model's ability to distinguish between borrowers who will default and those who will not. The trained logistic regression model is used to predict the probability of default for each loan in the dataset. An awareness of potential avenues for model improvement, such as exploring different algorithms and addressing class imbalance is also included.
+
+[View Project](Credit%20Risk%20Modelling.ipynb)
+:::
+::: 
+
+
+
+
+

@@ -1,0 +1,33 @@
+
+#pdf-embed, #pdf-embed-inner {
+    height: 400px !important;
+    display: flex;
+}
+
+.pdf-link {
+    color: #007bff; /* A nice blue color */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.pdf-link:hover {
+    text-decoration: underline;
+}
+
+#cover {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    /* commented for demo
+    float: left;
+    margin-left: 125px;
+    margin-top: 20px;
+    */
+    
+    /*for demo*/
+    display:inline-block;
+    vertical-align:middle;
+    opacity: 70%;
+
+}

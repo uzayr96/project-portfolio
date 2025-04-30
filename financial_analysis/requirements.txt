@@ -1,0 +1,11 @@
+pandas
+yfinance
+FinancialModelingPrep-Python
+shiny
+faicons
+plotly
+itables==2.0.0
+numpy
+jupyter
+yahooquery
+itables

@@ -1,0 +1,55 @@
+/*-- scss:defaults --*/
+$h2-font-size:          1.4rem !default;
+$headings-font-weight:  500 !default;
+
+$link-color: #00274c;
+
+$navbar-color:  #d3a7fa;
+
+// Code blocks
+$code-block-bg-alpha: -.8;
+
+/*-- scss:rules --*/
+
+// Background gradient: Light (top) to dark (bottom)
+body {
+  background: linear-gradient(to right, #f0f0f0, #959595);
+  color: #30005a; // Default fallback text color
+}
+
+img {
+  background-color: transparent !important;
+  background-blend-mode: lighten;
+}
+
+// Optional: fix headings if needed
+h1, h2, h3, h4, h5, h6 {
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, .3);
+}
+
+/* Set base font size for all paragraph text */
+p {
+  font-size: 1rem;
+  text-align: left;
+}
+
+/* Optional: adjust other elements */
+li {
+  font-size: 1rem;
+  text-align: left;
+}
+
+.markdown {
+  font-size: 1rem;
+  text-align: left;
+}
+
+body {
+  text-align: left;
+}
+
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}

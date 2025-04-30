@@ -1,0 +1,111 @@
+---
+title: "UZAIR AHMED"
+subtitle: "Data Science Analyst | Management Consultant"
+date: "2025-04-28"
+image: images/Photo.png
+echo: false
+width: 1500
+about:
+    template: jolla
+    image-shape: round
+    links: 
+      - icon: linkedin
+        text: LinkedIn
+        href: 'https://www.linkedin.com/in/uzairahmed1996/'
+      - icon: file
+        text: Resume
+        href: 'cv.pdf'
+---
+
+
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+
+# OVERVIEW
+
+**Data Science Analyst** with a proven track record of success supporting Europe's largest IT transformation initiative (GBP 430M), processing **470 million** weekly transactions. Leveraging advanced **SQL**, **Python**, and **Power BI**, I delivered actionable business insights through data-driven solutions and impactful reporting, significantly enhancing decision-making within a complex, high-volume environment. My two+ years of experience in data science and analytics have enabled me to drive impactful results.
+
+## CORE SKILLS
+
+
+:::: {.columns}
+
+::: {.column width=33% .text-left}
+
+### Expert
+- <img src="https://img.icons8.com/?size=100&id=J6KcaRLsTgpZ&format=png&color=000000" alt="SQL Icon" width="24" height="24"/> SQL
+- <img src="https://img.icons8.com/?size=100&id=13441&format=png&color=000000" alt="SQL Icon" width="24" height="24"/> Python
+- <img src="https://img.icons8.com/?size=100&id=Ny0t2MYrJ70p&format=png&color=000000" alt="SQL Icon" width="24" height="24"/> Power BI 
+- <img src="Databricks-Emblem.png" alt="SQL Icon" width="24" height="24"/> Azure DataBricks
+- <img src="https://img.icons8.com/color/24/000000/ibm.png" alt="SQL Icon" width="24" height="24"/> IBM Cognos 
+
+:::
+
+::: {.column width=33% .text-left}
+
+### Intermediate
+
+- <img src="azure-data-factory2539.jpg" alt="SQL Icon" width="24" height="24"/> Azure Data Factory
+- <img src="alteryx-with-text.png" alt="SQL Icon" width="24" height="24"/> Alteryx
+- <img src="https://img.icons8.com/?size=100&id=9Kvi1p1F0tUo&format=png&color=000000" alt="SQL Icon" width="24" height="24"/> Tableau
+- <img src="https://img.icons8.com/?size=100&id=CLvQeiwFpit4&format=png&color=000000" alt="SQL Icon" width="24" height="24"/> R Programming
+
+
+:::
+
+::: {.column width=33% .text-left}
+
+### Beginner
+
+- <img src="https://img.icons8.com/?size=100&id=SLx9kZV_N4bX&format=png&color=000000" alt="SQL Icon" width="24" height="24"/> PySpark
+- <img src="dbt.png" alt="SQL Icon" width="24" height="24"/> Dbt
+- <img src="https://img.icons8.com/?size=100&id=38192&format=png&color=000000" alt="SQL Icon" width="24" height="24"/> SAP
+- <img src="https://img.icons8.com/?size=100&id=z59v8G3kTK0s&format=png&color=000000" alt="SQL Icon" width="24" height="24"/> Workday
+
+
+:::
+
+::::
+
+
+## EDUCATION
+
+<div style="display: flex; justify-content: space-between; width: 100%; text-align:left;">
+  <div><strong>MSc Financial Economics</strong><br>
+  Otto-Von-Guericke University | Magdeburg, Germany</div>
+  <div style="text-align: right;">Oct 2024 – Present</div>
+</div>
+<br>
+<div style="display: flex; justify-content: space-between; width: 100%; text-align:left;">
+  <div><strong>MSc Business Analysis & Consulting</strong><br>
+  University of Strathclyde | Glasgow, United Kingdom</div>
+  <div style="text-align: right;">Sept 2021 – Sept 2022</div>
+</div>
+<br>
+<div style="display: flex; justify-content: space-between; width: 100%; text-align:left;">
+  <div><strong>Bachelor of Business Administration</strong><br>
+  SZABIST | Dubai, United Arab Emirates</div>
+  <div style="text-align: right;">Aug 2015 – Jan 2021</div>
+</div>
+<br>
+
+## EXPERIENCE
+
+<div style="display: flex; justify-content: space-between; width: 100%; text-align:left;">
+  <div><strong>Data Science Analyst</strong><br>
+  ASDA | Leeds, United Kingdom<br>
+  *Revenue: 20+ Billion GBP*<br>
+  *Employees: 130,000+*</div>
+  <div style="text-align: right;">Nov 2022 – Dec 2024</div>
+</div>
+<br>
+<div style="display: flex; justify-content: space-between; width: 100%; text-align:left;">
+  <div><strong>PowerBI Content Creator Intern (Remote)</strong><br>
+  TrainAnalytics | Melbourne, Australia<br>
+  *Non-Profit Organisation*</div>
+  <div style="text-align: right;">May 2020 – Oct 2020</div>
+</div>

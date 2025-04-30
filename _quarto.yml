@@ -1,0 +1,37 @@
+project:
+  type: website
+
+website:
+  open-graph: true
+  title: "UZAIR AHMED"
+  search: false
+  navbar:
+    background: '#30005a'
+    fontcolor:  #f0f0f0
+    logo: images/logo.jpg
+    left:
+      - href: index.qmd
+        text: Home
+      - href: project.qmd
+        text: Project Portfolio
+      - href: about.qmd
+        text: Résumé & Credentials
+    tools:
+      - icon: linkedin
+        text: LinkedIn
+        href: 'https://www.linkedin.com/in/uzairahmed1996/'
+  page-footer:
+    right: Copyright 2025, Uzair Ahmed
+
+format:
+  html:
+    toc: false
+    smooth-scroll: true
+    page-layout: article
+    link-external-icon: true
+    link-external-newwindow: true
+    link-external-filter: '^(?:http:|https:)\/\/www\.quarto\.org\/custom'
+    theme: [cosmo, custom.scss]
+    css: custom.css
+    fontsize: 1.2rem
+    linestretch: 1.7

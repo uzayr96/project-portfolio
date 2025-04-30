@@ -1,0 +1,370 @@
+/*-- scss:defaults --*/
+
+// Colors
+$body-bg: #121212;
+$body-color: #ffffff;
+$navbar-bg: #1f1f1f;
+$navbar-fg: #ffffff;
+
+$card-bg: #1e1e1e;
+$card-border-color: transparent;
+
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 992px;
+
+
+// Typography & spacing
+$font-size-base: 1rem; // Adjusted base font size for better responsiveness
+$font-weight-bold: 200;
+$spacer: 1rem;
+
+/*-- scss:mixins --*/
+
+@mixin breakpoint($point) {
+  @if $point == tablet {
+    @media (max-width: $breakpoint-tablet) { @content; }
+  } @else if $point == desktop {
+    @media (min-width: $breakpoint-desktop) { @content; }
+  } @else if $point == small-desktop {
+    @media (max-width: ($breakpoint-desktop - 1px)) { @content; }
+  }
+}
+
+@mixin card-layout {
+  background: linear-gradient(0deg, darken($body-bg, 5%) 0%, $body-bg 100%);
+  background-color: $card-bg;
+  border: 1px solid $card-border-color;
+  box-shadow: 0 2px 8px rgba(196, 241, 234, 0.3); // Added slight transparency to shadow
+  padding: $spacer * 0.5 !important;
+  margin-bottom: $spacer;
+  border-radius: $spacer * 0.5;
+}
+
+@mixin chart-text {
+  color: white !important;
+  font-family: inherit;
+  font-weight: 400 !important;
+}
+
+/*-- scss:rules --*/
+
+// === Body ===
+body {
+  background-color: $body-bg;
+  color: $body-color;
+  font-size: $font-size-base;
+  margin: 0; // Remove default body margin
+  padding: 0; // Remove default body padding
+}
+
+.quarto-dashboard {
+  display: flex;
+  flex-direction: column;
+  /* Remove or comment out the following line: */
+  /* min-height: 100vh; */
+  height: auto; /* Or leave it out, as auto is the default */
+}
+
+.quarto-dashboard-content {
+  flex-grow: 1; // Allow content to expand and fill available space
+  padding: $spacer;
+
+  @include breakpoint(tablet) {
+    padding: $spacer * 0.75;
+  }
+
+  @include breakpoint(small-desktop) {
+    padding: $spacer * 1.25;
+  }
+}
+
+.quarto-dashboard .bslib-value-box .value-box-value {
+  font-size: clamp(0.6em, 8vw, 1.2em) !important; // Adjusted clamp for better mobile scaling
+  font-weight: 300 !important; // Slightly lighter font weight for value boxes
+}
+
+// === Navbar ===
+.navbar, .navbar-dark {
+  background-color: $navbar-bg !important;
+  color: $navbar-fg !important;
+  padding: 0.5rem 1rem !important; // Adjust navbar padding for smaller screens
+
+  .navbar-brand {
+    color: $navbar-fg !important;
+    font-size: 1.2rem; // Slightly smaller brand font on mobile
+  }
+
+  .nav-link {
+    color: $navbar-fg !important;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .nav-link:hover {
+    color: lighten($navbar-fg, 20%) !important;
+  }
+}
+
+// === Tabsets ===
+.nav-tabs {
+  display: flex;
+  overflow-x: auto; // Enable horizontal scrolling for many tabs on small screens
+  justify-content: flex-start !important; // Align tabs to the left on smaller screens
+  background-color: #1e1e1e;
+  border-bottom: none;
+  margin-bottom: $spacer * 0.75;
+
+  .nav-item {
+    flex-shrink: 0; // Prevent tabs from shrinking too much
+  }
+
+  .nav-link {
+    color: #ccc;
+    background-color: #222;
+    border: none;
+    margin: 0 $spacer * 0.25;
+    border-radius: 5px 5px 0 0;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+
+    @include breakpoint(desktop) {
+      margin: 0 $spacer * 0.5;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+
+    &.active {
+      color: #fff;
+      background-color: #444;
+      border-bottom: 2px solid #00aaff;
+    }
+  }
+}
+
+// === Headers ===
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: rgb(146, 246, 248) !important;
+  margin-bottom: $spacer * 0.5;
+}
+
+h1 { font-size: 1.4rem !important; }
+h2 { font-size: 1.2rem !important; }
+h3 { font-size: 1rem !important; }
+h4 { font-size: 0.9rem !important; }
+h5 { font-size: 0.8rem !important; }
+h6 { font-size: 0.7rem !important; }
+
+// === Cards ===
+.card {
+  @include card-layout;
+
+  .card-title {
+    font-weight: bold;
+    color: white;
+    font-size: 1rem;
+    margin-bottom: $spacer * 0.25;
+  }
+
+  .card-body {
+    position: relative;
+    font-size: 0.85rem;
+    padding: $spacer * 0.5;
+
+    .toggle-section {
+      position: absolute;
+      top: 0.2rem;
+      right: 0.2rem;
+      font-size: 0.8rem;
+      background-color: #333;
+      color: #fff;
+      padding: 0.3rem 0.4rem;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  }
+
+  @include breakpoint(desktop) {
+    .card-title {
+      font-size: 1.2rem;
+      margin-bottom: $spacer * 0.5;
+    }
+    .card-body {
+      font-size: 1rem;
+      padding: $spacer * 0.75;
+      .toggle-section {
+        font-size: 1rem;
+        padding: 0.5rem 0.5rem;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+
+// === Value Boxes ===
+.value-box {
+  display: flex;
+  flex-direction: column; // Stack icon and value on smaller screens
+  align-items: center;
+  justify-content: center;
+  background-color: #222;
+  border-radius: $spacer * 0.25;
+  color: white;
+  padding: $spacer * 0.5;
+  text-align: center;
+
+  @include breakpoint(desktop) {
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: left;
+    padding: $spacer;
+  }
+}
+
+.value {
+  font-size: 1rem !important; // Adjusted for better initial size
+  font-weight: 300 !important;
+  color: white;
+
+  @include breakpoint(desktop) {
+    font-size: 2rem !important;
+  }
+}
+
+.icon {
+  font-size: 1rem !important;
+  width: auto;
+  height: auto;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0;
+  margin-bottom: $spacer * 0.25;
+
+  @include breakpoint(desktop) {
+    margin-right: $spacer * 0.5;
+    margin-bottom: 0;
+  }
+}
+
+// === Charts (Plotly, ApexCharts, Echarts) ===
+.plotly, .chart-wrapper, .echart, .apexcharts-canvas {
+  color: white !important;
+  font-family: inherit;
+  font-weight: 400 !important;
+  min-height: 200px; // Ensure charts have a minimum height
+
+  .xtick, .ytick, text {
+    fill: white !important;
+    color: white !important;
+    font-size: 0.7rem !important; // Slightly larger chart text on mobile
+    font-weight: 400 !important;
+  }
+
+  @include breakpoint(desktop) {
+    font-size: 0.8rem !important;
+    .xtick, .ytick, text {
+      font-size: 0.8rem !important;
+    }
+  }
+}
+
+// === Ensure Flexible Layout for Rows and Columns ===
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -$spacer * 0.5;
+  margin-right: -$spacer * 0.5;
+}
+
+.row > .col, .row > [class^="col-"] {
+  padding-left: $spacer * 0.5;
+  padding-right: $spacer * 0.5;
+  margin-bottom: $spacer * 0.5;
+  flex-basis: 100%; // Default to full width on small screens
+  max-width: 100%;
+
+  @include breakpoint(desktop) {
+    flex-basis: auto;
+    max-width: none;
+
+    &[width~="30%"] {
+      flex-basis: 30%;
+      max-width: 30%;
+    }
+    &[width~="40%"] {
+      flex-basis: 40%;
+      max-width: 40%;
+    }
+    &[width~="50%"] {
+      flex-basis: 50%;
+      max-width: 50%;
+    }
+    &[width~="60%"] {
+      flex-basis: 60%;
+      max-width: 60%;
+    }
+    &[width~="70%"] {
+      flex-basis: 70%;
+      max-width: 70%;
+    }
+  }
+}
+
+// === Tables ===
+table {
+  color: white !important;
+  font-size: 0.8rem;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: $spacer;
+
+  thead {
+    font-weight: bold;
+    background-color: #2a2a2a;
+    color: white !important;
+  }
+
+  th, td {
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #333;
+  }
+
+  tbody tr:hover {
+    background-color: #2f2f2f;
+  }
+
+  @include breakpoint(desktop) {
+    font-size: 1rem;
+    th, td {
+      padding: 0.75rem 1rem;
+    }
+  }
+}
+
+// === Hidden Toggle Support ===
+.hidden {
+  display: none !important;
+}
+
+/* If the table is directly inside a card-body */
+.card-body > table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* If the table is inside another div within the card-body (replace .your-table-container) */
+.your-table-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Another common approach using text-align on the parent */
+.your-table-parent { /* Replace with the actual parent container class */
+  text-align: center;
+}
+.your-table-parent > table { /* Target the table within */
+  display: inline-block; /* Allows the table to be centered by text-align */
+}
