@@ -1,0 +1,8 @@
+plotly
+pandas
+numpy
+yahooquery
+matplotlib
+seaborn
+yfinance
+scikit-learn
