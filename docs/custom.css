@@ -31,3 +31,18 @@
     opacity: 70%;
 
 }
+
+
+
+@media (max-width: 768px) {
+    #pdf-embed, #pdf-embed-inner {
+        flex-direction: column;
+        height: auto;
+    }
+
+    #cover {
+        width: 150px;
+        height: 150px;
+        margin: 10px auto;
+    }
+}

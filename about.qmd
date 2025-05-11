@@ -3,7 +3,7 @@ title: Résumé & Credentials
 width: 1500
 ---
 
-[View My CV](cv.pdf){target="_blank"}
+[View My CV](CV.pdf){target="_blank"}
 
 # ACADEMIC PROFILE
 

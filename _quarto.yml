@@ -4,7 +4,7 @@ project:
 
 website:
   open-graph: true
-  title: "UZAIR AHMED"
+  title: "UZAYR A"
   search: false
   navbar:
     background: '#30005a'
@@ -20,7 +20,7 @@ website:
     tools:
       - icon: linkedin
         text: LinkedIn
-        href: 'https://www.linkedin.com/in/uzairahmed1996/'
+        href: 'https://www.linkedin.com/in/uzayra96'
   page-footer:
     right: Copyright 2025, Uzair Ahmed
 

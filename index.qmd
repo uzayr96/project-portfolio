@@ -1,8 +1,8 @@
 ---
-title: "UZAIR AHMED"
+title: "UZAYR A"
 subtitle: "Data Science Analyst | Management Consultant"
 date: "2025-04-28"
-image: images/Photo.png
+image: images/profile_2.jpeg
 echo: false
 width: 1500
 about:
@@ -11,10 +11,10 @@ about:
     links: 
       - icon: linkedin
         text: LinkedIn
-        href: 'https://www.linkedin.com/in/uzairahmed1996/'
+        href: 'https://www.linkedin.com/in/uzayra96'
       - icon: file
         text: Resume
-        href: 'cv.pdf'
+        href: 'CV.pdf'
 ---
 
 
